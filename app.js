@@ -1,27 +1,27 @@
-initSlider(['text 1', 'text 2', 'text 3'], '.slider');
+const input = document.querySelector('#display')
+const buttons = document.querySelectorAll('.button');
+let str = '';
 
-function initSlider(arr, selector) {
-	let parent = document.querySelector(selector);
+for (var i = 0; i < buttons.length; i++) {
+	addEvent(buttons[i]);
+}
 
-	let elem = parent.querySelector('.elem');
-	let prev = parent.querySelector('.prev');
-	let next = parent.querySelector('.next');
+function addEvent(button) {
+	button.addEventListener('click', event);
 
-	let i = 0;
-	elem.innerHTML = arr[i];
 
-	next.addEventListener('click', function () {
-		i++
-		if (i == arr.length) {
-			i = 0;
+	function event() {
+		let type = button.getAttribute('data-type');
+		if (type === '=') {
+			str = eval(str);
+			display.value = str;
+			return;
+		} else if (type === 'C') {
+			str = '';
+		} else {
+			str += type;
+			console.log(str)
 		}
-		elem.innerHTML = arr[i];
-	})
-	prev.addEventListener('click', function () {
-		i--
-		if (i == -1) {
-			i = arr.length - 1;
-		}
-		elem.innerHTML = arr[i];
-	})
+		display.value = str;
+	}
 }
